@@ -1,0 +1,88 @@
+
+.model small
+.stack 100h
+.data
+Msg1 db  'Provided Number is equal to stored one$'
+Msg2 db  'Provided Number is not equal to stored one. Please enter another number$'
+Msg3 db  'Please enter a number$'
+.code
+main proc
+    mov cx,5
+    mov ax,@data
+    mov ds,ax
+L5:   
+   L4:
+    mov dx,offset msg3
+    mov ah,9
+    int 21h
+    
+    mov ah,2
+    mov dl,10
+    int 21h
+    mov dl,13
+    mov ah,2
+    int 21h
+    
+    mov ah,1
+    int 21h
+    mov dl,'3'
+    cmp dl,al
+    je L1
+    jne L2
+    
+    L2:
+    
+    mov ah,2
+    mov dl,10
+    int 21h
+    mov dl,13
+    mov ah,2
+    int 21h
+    mov dx,offset Msg2
+     
+    mov ah,9
+    int 21h
+    
+    mov ah,2
+    mov dl,10
+    int 21h
+    mov dl,13
+    mov ah,2
+    int 21h
+    
+    jmp L4
+    
+    L1:
+
+    mov ah,2
+    mov dl,10
+    int 21h
+    mov dl,13
+    mov ah,2
+    int 21h
+    mov dx,offset Msg1
+    mov ah,9
+    int 21h
+    
+    mov ah,2
+    mov dl,10
+    int 21h
+    mov dl,13
+    mov ah,2
+    int 21h
+    
+    jmp L3 
+    
+    
+    
+    L3:
+    loop L5
+    mov ah,4ch
+    int 21h
+    main endp
+end main
+
+
+
+
+    

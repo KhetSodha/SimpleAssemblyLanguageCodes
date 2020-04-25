@@ -1,0 +1,54 @@
+.model small
+.stack 100h
+.data
+MSG1 db 'Name: Mubeen Ahmed Khan$'
+Msg2 db 'email: mubeen.khan@szabist.edu.pk$'
+MSG3 db 'Institution: SZABIST$'
+MSG4 db 'Institution ID: 123$'
+.code
+main proc
+     mov ax,@data
+     mov ds,ax
+     
+     lea dx,MSG1
+     call print_string
+     call next_line
+     
+     lea dx,MSG2
+     call print_string
+     call next_line
+     
+     mov dx,offset MSG3
+     call print_string
+     call next_line
+     
+     lea dx,MSG4
+     call print_string
+     call next_line 
+     
+     mov ah,4ch
+     int 21h
+     
+     ret    
+ main endp  
+
+     next_line proc
+        mov ah,2
+        mov dl,10
+        int 21h
+        mov ah,2
+        mov dl,13
+        int 21h
+        ret
+        next_line endp
+     
+     print_string proc
+        mov ah,9
+        int 21h
+        ret
+        print_string endp
+     
+    
+end main
+
+

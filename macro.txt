@@ -1,0 +1,125 @@
+print macro m1
+    lea dx,m1
+    mov ah,9
+    int 21h
+endm 
+
+take_string_input macro m1
+    
+    mov si,offset arr1
+    
+    L1:
+    mov ah,1
+    int 21h
+    cmp al,13
+    je end_
+    
+    mov [si],al
+    inc si
+    jmp L1
+    
+    end_:
+    
+    mov dl,10
+    mov ah,2
+    int 21h 
+    
+    mov dl,13
+    mov ah,2
+    int 21h
+        
+    mov dx,offset arr1
+    mov ah,9
+    int 21h 
+    endm
+take_input macro
+    mov ah,1
+    int 21h
+    endm
+new_line macro
+    mov ah,2
+    mov dl,10
+    int 21h
+    mov ah,2
+    mov dl,13
+    int 21h
+    endm
+.model small
+.stack 100h
+.data
+
+Msg1 db 'Hello World$'
+Msg2 db 'String$' 
+msg3 db 'wow$'
+arr1 db 30 dup ('$')
+.code
+ main proc 
+    mov ax,@data
+    mov ds,ax
+    
+    print msg1
+    new_line
+    take_input
+    new_line
+    print msg2
+    new_line
+    print msg3
+    new_line
+    take_string_input
+    mov ah,4ch 
+    int 21h
+    main endp
+ end main
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Print macro m1
+   
+    lea dx,m1
+    mov ah,9
+    
+    int 21h
+ endm
+
+new_line macro 
+    mov ah,2
+    mov dl,0Ah
+    int 21h
+    mov ah,2
+    mov dl,13
+    int 21h
+endm
+
+ 
+.model small
+.stack 100h
+.data
+Msg1 db 'Hello World$'
+msg2 db 'Mubeen Ahmed Khan$'
+.code
+main proc
+    mov ax,@data
+    mov ds,ax 
+    
+    print msg1
+    new_line
+    print msg2
+    
+    mov ah,4ch
+    int 21h
+    main endp
+end main
+
